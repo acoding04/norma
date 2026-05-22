@@ -69,7 +69,7 @@ export const MOCK_DOCUMENTS: Document[] = [
     id: '2',
     name: 'Data Processing Impact Assessment',
     type: 'assessment',
-    framework: 'GDPR',
+    framework: 'EU AI Act',
     uploadedAt: '2025-01-20',
     size: '1.8 MB',
   },
@@ -101,7 +101,7 @@ export const MOCK_DOCUMENTS: Document[] = [
     id: '6',
     name: 'Privacy Notice',
     type: 'policy',
-    framework: 'GDPR',
+    framework: 'EU AI Act',
     uploadedAt: '2025-03-01',
     size: '420 KB',
   },
@@ -116,20 +116,6 @@ export const MOCK_INTEGRATIONS: Integration[] = [
     icon: 'github',
     connected: true,
   },
-  {
-    id: '2',
-    name: 'Jira',
-    description: 'Link Jira projects to track compliance tasks and audit findings.',
-    icon: 'ticket',
-    connected: false,
-  },
-  {
-    id: '3',
-    name: 'Confluence',
-    description: 'Sync documentation from Confluence spaces for framework compliance.',
-    icon: 'book-open',
-    connected: false,
-  },
 ];
 
 export const MOCK_FRAMEWORKS: Framework[] = [
@@ -140,15 +126,6 @@ export const MOCK_FRAMEWORKS: Framework[] = [
       'The European Union Artificial Intelligence Act establishes a comprehensive regulatory framework for AI systems based on risk classification. It mandates conformity assessments, transparency obligations, and human oversight requirements for high-risk AI systems.',
     category: 'Regulation',
     documentCount: 3,
-    status: 'active',
-  },
-  {
-    id: '2',
-    name: 'GDPR',
-    description:
-      'The General Data Protection Regulation governs the processing of personal data within the EU. For AI systems, it requires lawful basis for data processing, data protection impact assessments, and ensures rights related to automated decision-making.',
-    category: 'Regulation',
-    documentCount: 2,
     status: 'active',
   },
   {
@@ -166,7 +143,7 @@ export const MOCK_CHAT_MESSAGES: ChatMessage[] = [];
 
 export const SUGGESTED_QUESTIONS = [
   'What risk level is our project under the EU AI Act?',
-  'Summarize our GDPR compliance gaps',
+  'Summarize our compliance gaps',
   'What documents are we missing for conformity assessment?',
   'Explain Article 14 human oversight requirements',
 ];
@@ -205,25 +182,3 @@ export const MOCK_REPORTING_TAB1: ReportingQuestion[] = [
   },
 ];
 
-export const MOCK_REPORTING_TAB2: ReportingQuestion[] = [
-  {
-    id: '6',
-    question: 'Is personal data processed by the system?',
-    answer: '',
-  },
-  {
-    id: '7',
-    question: 'What is the lawful basis for data processing?',
-    answer: '',
-  },
-  {
-    id: '8',
-    question: 'How are data subject rights handled (access, erasure, portability)?',
-    answer: '',
-  },
-  {
-    id: '9',
-    question: 'Has a Data Protection Impact Assessment been conducted?',
-    answer: '',
-  },
-];

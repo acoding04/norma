@@ -12,7 +12,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { PageHeader } from '@/components/page-header';
-import { MOCK_REPORTING_TAB1, MOCK_REPORTING_TAB2, type ReportingQuestion } from '@/data/mock';
+import { MOCK_REPORTING_TAB1, type ReportingQuestion } from '@/data/mock';
 
 function QuestionTable({ questions }: { questions: ReportingQuestion[] }) {
   const [answers, setAnswers] = useState<Record<string, string>>(() =>
@@ -77,13 +77,9 @@ export function ReportingPage() {
           <Tabs defaultValue="ai-act">
             <TabsList>
               <TabsTrigger value="ai-act">EU AI Act</TabsTrigger>
-              <TabsTrigger value="gdpr">GDPR</TabsTrigger>
             </TabsList>
             <TabsContent value="ai-act" className="mt-4">
               <QuestionTable questions={MOCK_REPORTING_TAB1} />
-            </TabsContent>
-            <TabsContent value="gdpr" className="mt-4">
-              <QuestionTable questions={MOCK_REPORTING_TAB2} />
             </TabsContent>
           </Tabs>
         </div>
