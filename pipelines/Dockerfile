@@ -17,12 +17,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certifi
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 ENV PATH="/root/.local/bin:$PATH"
 
-COPY pyproject.toml uv.lock* ./
+COPY pyproject.toml ./
 
-RUN --mount=type=secret,id=ca_cert \
-    UV_INDEX_URL=${UV_INDEX_URL} \
-    UV_NATIVE_TLS=true \
-    uv sync --no-dev --no-install-project
+RUN UV_INDEX_URL=${UV_INDEX_URL} \
+    uv lock --native-tls && \
+    uv sync --no-dev --no-install-project --native-tls
 
 COPY . .
 
