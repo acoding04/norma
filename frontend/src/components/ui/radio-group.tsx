@@ -13,11 +13,7 @@ function RadioGroup({ className, ...props }: RadioGroupPrimitive.Props) {
   );
 }
 
-function RadioGroupItem({
-  className,
-  children,
-  ...props
-}: Radio.Root.Props<string>) {
+function RadioGroupItem({ className, children, ...props }: Radio.Root.Props<string>) {
   return (
     <label className="flex items-center gap-2.5 text-sm">
       <Radio.Root

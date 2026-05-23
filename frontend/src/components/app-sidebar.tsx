@@ -65,159 +65,171 @@ export function AppSidebar() {
 
   return (
     <>
-    <Sidebar collapsible="icon">
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" className="pointer-events-none justify-center overflow-visible">
-              <span className="text-2xl font-semibold group-data-[collapsible=icon]:hidden">Norma</span>
-              <span className="hidden text-2xl font-semibold group-data-[collapsible=icon]:block">N</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                render={
-                  <SidebarMenuButton
-                    size="lg"
-                    className="data-[popup-open]:bg-sidebar-accent mt-1 h-14 border border-sidebar-border"
-                  />
-                }
+      <Sidebar collapsible="icon">
+        <SidebarHeader>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                size="lg"
+                className="pointer-events-none justify-center overflow-visible"
               >
-                <div className="bg-muted flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <LayoutGrid className="size-4" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">
-                    {currentProject?.name ?? 'No project'}
-                  </span>
-                  <span className="text-sidebar-foreground truncate text-xs">
-                    {currentProject?.riskClassification
-                      ? RISK_LABELS[currentProject.riskClassification]
-                      : 'Select a project'}
-                  </span>
-                </div>
-                <ChevronsUpDown className="ml-auto size-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="min-w-56" align="start" side="bottom" sideOffset={4}>
-                {projects.map((project) => (
-                  <DropdownMenuItem key={project.id} onClick={() => setCurrentProject(project)}>
-                    {project.name}
+                <span className="text-2xl font-semibold group-data-[collapsible=icon]:hidden">
+                  Norma
+                </span>
+                <span className="hidden text-2xl font-semibold group-data-[collapsible=icon]:block">
+                  N
+                </span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  render={
+                    <SidebarMenuButton
+                      size="lg"
+                      className="data-[popup-open]:bg-sidebar-accent mt-1 h-14 border border-sidebar-border"
+                    />
+                  }
+                >
+                  <div className="bg-muted flex aspect-square size-8 items-center justify-center rounded-lg">
+                    <LayoutGrid className="size-4" />
+                  </div>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">
+                      {currentProject?.name ?? 'No project'}
+                    </span>
+                    <span className="text-sidebar-foreground truncate text-xs">
+                      {currentProject?.riskClassification
+                        ? RISK_LABELS[currentProject.riskClassification]
+                        : 'Select a project'}
+                    </span>
+                  </div>
+                  <ChevronsUpDown className="ml-auto size-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="min-w-56"
+                  align="start"
+                  side="bottom"
+                  sideOffset={4}
+                >
+                  {projects.map((project) => (
+                    <DropdownMenuItem key={project.id} onClick={() => setCurrentProject(project)}>
+                      {project.name}
+                    </DropdownMenuItem>
+                  ))}
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => setNewProjectOpen(true)}>
+                    <Plus className="mr-2 size-4" />
+                    New Project
                   </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarHeader>
+
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarGroupLabel>General</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {NAV_GENERAL.map((item) => (
+                  <SidebarMenuItem key={item.path}>
+                    <SidebarMenuButton
+                      isActive={location.pathname === item.path}
+                      onClick={() => navigate(item.path)}
+                      tooltip={item.title}
+                    >
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
                 ))}
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => setNewProjectOpen(true)}>
-                  <Plus className="mr-2 size-4" />
-                  New Project
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
 
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>General</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {NAV_GENERAL.map((item) => (
-                <SidebarMenuItem key={item.path}>
-                  <SidebarMenuButton
-                    isActive={location.pathname === item.path}
-                    onClick={() => navigate(item.path)}
-                    tooltip={item.title}
-                  >
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+          <SidebarGroup>
+            <SidebarGroupLabel>Project</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {NAV_PROJECT.map((item) => (
+                  <SidebarMenuItem key={item.path}>
+                    <SidebarMenuButton
+                      isActive={location.pathname === item.path}
+                      onClick={() => navigate(item.path)}
+                      tooltip={item.title}
+                    >
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
 
-        <SidebarGroup>
-          <SidebarGroupLabel>Project</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {NAV_PROJECT.map((item) => (
-                <SidebarMenuItem key={item.path}>
-                  <SidebarMenuButton
-                    isActive={location.pathname === item.path}
-                    onClick={() => navigate(item.path)}
-                    tooltip={item.title}
-                  >
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+          <SidebarGroup>
+            <SidebarGroupLabel>Configuration</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {NAV_CONFIG.map((item) => (
+                  <SidebarMenuItem key={item.path}>
+                    <SidebarMenuButton
+                      isActive={location.pathname === item.path}
+                      onClick={() => navigate(item.path)}
+                      tooltip={item.title}
+                    >
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
 
-        <SidebarGroup>
-          <SidebarGroupLabel>Configuration</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {NAV_CONFIG.map((item) => (
-                <SidebarMenuItem key={item.path}>
-                  <SidebarMenuButton
-                    isActive={location.pathname === item.path}
-                    onClick={() => navigate(item.path)}
-                    tooltip={item.title}
-                  >
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
+        <Separator className="bg-sidebar-border mx-0" />
+        <SidebarFooter>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <DropdownMenu>
+                <DropdownMenuTrigger render={<SidebarMenuButton size="lg" />}>
+                  <Avatar className="size-8">
+                    <AvatarFallback className="bg-sidebar-primary text-sidebar-primary-foreground text-xs">
+                      JD
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">Jane Doe</span>
+                    <span className="text-sidebar-foreground truncate text-xs">
+                      jane.doe@company.com
+                    </span>
+                  </div>
+                  <ChevronsUpDown className="ml-auto size-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="min-w-56" align="end" side="top" sideOffset={4}>
+                  <DropdownMenuItem onClick={() => navigate('/settings')}>
+                    <Settings className="mr-2 size-4" />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <LogOut className="mr-2 size-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
+      </Sidebar>
 
-      <Separator className="bg-sidebar-border mx-0" />
-      <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger render={<SidebarMenuButton size="lg" />}>
-                <Avatar className="size-8">
-                  <AvatarFallback className="bg-sidebar-primary text-sidebar-primary-foreground text-xs">
-                    JD
-                  </AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Jane Doe</span>
-                  <span className="text-sidebar-foreground truncate text-xs">
-                    jane.doe@company.com
-                  </span>
-                </div>
-                <ChevronsUpDown className="ml-auto size-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="min-w-56" align="end" side="top" sideOffset={4}>
-                <DropdownMenuItem onClick={() => navigate('/settings')}>
-                  <Settings className="mr-2 size-4" />
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <LogOut className="mr-2 size-4" />
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
-    </Sidebar>
-
-    <NewProjectDialog open={newProjectOpen} onOpenChange={setNewProjectOpen} />
+      <NewProjectDialog open={newProjectOpen} onOpenChange={setNewProjectOpen} />
     </>
   );
 }

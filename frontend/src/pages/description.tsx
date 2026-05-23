@@ -90,7 +90,9 @@ export function DescriptionPage() {
                 <Card>
                   <CardHeader>
                     <CardTitle>Intended Users</CardTitle>
-                    <CardDescription>Who will operate or be affected by this system?</CardDescription>
+                    <CardDescription>
+                      Who will operate or be affected by this system?
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Textarea
