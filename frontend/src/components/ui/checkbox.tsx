@@ -3,11 +3,7 @@ import { CheckIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
-function Checkbox({
-  className,
-  children,
-  ...props
-}: CheckboxPrimitive.Root.Props) {
+function Checkbox({ className, children, ...props }: CheckboxPrimitive.Root.Props) {
   return (
     <label className="flex items-center gap-2.5 text-sm">
       <CheckboxPrimitive.Root

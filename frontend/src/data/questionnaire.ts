@@ -124,7 +124,8 @@ export const QUESTIONNAIRE_SECTIONS: QuestionnaireSection[] = [
           { value: 'vehicles', label: 'Motor vehicles / marine equipment' },
           {
             value: 'pressure',
-            label: 'Pressure equipment, recreational craft, cableway installations, or gas appliances',
+            label:
+              'Pressure equipment, recreational craft, cableway installations, or gas appliances',
           },
           { value: 'none', label: 'None of the above' },
         ],
@@ -161,7 +162,8 @@ export const QUESTIONNAIRE_SECTIONS: QuestionnaireSection[] = [
           },
           {
             value: 'infrastructure',
-            label: 'Critical infrastructure (road traffic, water, gas, electricity, digital infrastructure)',
+            label:
+              'Critical infrastructure (road traffic, water, gas, electricity, digital infrastructure)',
           },
           {
             value: 'education',
@@ -169,19 +171,23 @@ export const QUESTIONNAIRE_SECTIONS: QuestionnaireSection[] = [
           },
           {
             value: 'employment',
-            label: 'Employment (recruitment, CV screening, promotion, task allocation, performance monitoring, termination)',
+            label:
+              'Employment (recruitment, CV screening, promotion, task allocation, performance monitoring, termination)',
           },
           {
             value: 'essential-services',
-            label: 'Essential services (public benefits eligibility, credit scoring, insurance pricing, emergency dispatch)',
+            label:
+              'Essential services (public benefits eligibility, credit scoring, insurance pricing, emergency dispatch)',
           },
           {
             value: 'law-enforcement',
-            label: 'Law enforcement (victim risk, polygraphs, evidence reliability, recidivism, profiling)',
+            label:
+              'Law enforcement (victim risk, polygraphs, evidence reliability, recidivism, profiling)',
           },
           {
             value: 'migration',
-            label: 'Migration, asylum, or border control (risk assessment, document examination, person detection)',
+            label:
+              'Migration, asylum, or border control (risk assessment, document examination, person detection)',
           },
           {
             value: 'justice',
@@ -197,7 +203,8 @@ export const QUESTIONNAIRE_SECTIONS: QuestionnaireSection[] = [
         options: [
           {
             value: 'yes',
-            label: 'Yes — it processes data about identifiable individuals to produce evaluations or decisions',
+            label:
+              'Yes — it processes data about identifiable individuals to produce evaluations or decisions',
           },
           {
             value: 'no',
@@ -214,7 +221,8 @@ export const QUESTIONNAIRE_SECTIONS: QuestionnaireSection[] = [
           { value: 'yes', label: 'Yes' },
           {
             value: 'no',
-            label: 'No — it only performs simple factual classification (e.g., sorting by age) or narrow procedural tasks (e.g., file indexing, formatting)',
+            label:
+              'No — it only performs simple factual classification (e.g., sorting by age) or narrow procedural tasks (e.g., file indexing, formatting)',
           },
           { value: 'not-sure', label: 'Not sure' },
         ],
@@ -226,19 +234,23 @@ export const QUESTIONNAIRE_SECTIONS: QuestionnaireSection[] = [
         options: [
           {
             value: 'procedural',
-            label: 'Narrow procedural tasks (data conversion, file sorting, duplicate detection) without value judgments',
+            label:
+              'Narrow procedural tasks (data conversion, file sorting, duplicate detection) without value judgments',
           },
           {
             value: 'improve-human',
-            label: 'Improving previously completed human work (grammar checks, formatting, style consistency) without altering substance',
+            label:
+              'Improving previously completed human work (grammar checks, formatting, style consistency) without altering substance',
           },
           {
             value: 'detect-patterns',
-            label: 'Detecting patterns or anomalies in completed assessments for human review, without modifying active files',
+            label:
+              'Detecting patterns or anomalies in completed assessments for human review, without modifying active files',
           },
           {
             value: 'preparatory',
-            label: 'Preparatory work for an assessment (retrieving legal provisions, matching guidelines) without providing evaluations or recommendations',
+            label:
+              'Preparatory work for an assessment (retrieving legal provisions, matching guidelines) without providing evaluations or recommendations',
           },
           {
             value: 'none',
@@ -251,8 +263,7 @@ export const QUESTIONNAIRE_SECTIONS: QuestionnaireSection[] = [
   {
     id: 'scope-context',
     title: 'Scope & Context',
-    description:
-      'Additional context questions for systems classified as high-risk.',
+    description: 'Additional context questions for systems classified as high-risk.',
     questions: [
       {
         id: 'q10',
@@ -285,11 +296,13 @@ export const QUESTIONNAIRE_SECTIONS: QuestionnaireSection[] = [
         options: [
           {
             value: 'in-the-loop',
-            label: 'Human-in-the-loop — a person validates each action before the system executes it',
+            label:
+              'Human-in-the-loop — a person validates each action before the system executes it',
           },
           {
             value: 'on-the-loop',
-            label: 'Human-on-the-loop — the system acts autonomously, but a person can review and revert after the fact',
+            label:
+              'Human-on-the-loop — the system acts autonomously, but a person can review and revert after the fact',
           },
           {
             value: 'autonomous',

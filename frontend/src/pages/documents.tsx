@@ -99,7 +99,9 @@ export function DocumentsPage() {
                                 </Badge>
                               )}
                             </div>
-                            <p className="text-muted-foreground text-xs whitespace-normal">{doc.description}</p>
+                            <p className="text-muted-foreground text-xs whitespace-normal">
+                              {doc.description}
+                            </p>
                           </TableCell>
                           <TableCell className="text-right pr-4">
                             <Button variant="outline" size="sm" className="w-24 cursor-pointer">

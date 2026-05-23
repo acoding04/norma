@@ -37,7 +37,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         code: 'CYB-03',
         title: 'Prompt Injection Mitigation',
         questions: [
-          'Does the system have input and output guardrails to neutralise malicious prompt injections that alter the model\'s purpose?',
+          "Does the system have input and output guardrails to neutralise malicious prompt injections that alter the model's purpose?",
         ],
       },
       {
@@ -161,7 +161,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG08',
-        title: 'Ensure documentation responsible parties have access to the document management system',
+        title:
+          'Ensure documentation responsible parties have access to the document management system',
         questions: [
           'Has it been verified that all responsible parties have adequate access to the document management system?',
           'Are there differentiated access policies based on roles and responsibilities?',
@@ -169,7 +170,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG09',
-        title: 'Ensure the document management system has conservation mechanisms (backups, redundancy)',
+        title:
+          'Ensure the document management system has conservation mechanisms (backups, redundancy)',
         questions: [
           'Have security and backup measures (backups, redundancy, etc.) been implemented to preserve technical documentation integrity?',
           'Are periodic audits conducted to verify these mechanisms are active and functioning correctly?',
@@ -201,7 +203,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG13',
-        title: 'Identify available and relevant harmonised standards (CEN/CENELEC, ISO, NIST, etc.)',
+        title:
+          'Identify available and relevant harmonised standards (CEN/CENELEC, ISO, NIST, etc.)',
         questions: [
           'Has an identification of relevant harmonised standards been carried out?',
           'Is periodic monitoring conducted of normative changes that could affect system compliance?',
@@ -272,9 +275,10 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG22',
-        title: 'Include system purpose, provider name, and version with relation to previous versions',
+        title:
+          'Include system purpose, provider name, and version with relation to previous versions',
         questions: [
-          'Does the documentation clearly include the system\'s purpose, provider name, and corresponding version?',
+          "Does the documentation clearly include the system's purpose, provider name, and corresponding version?",
           'Is traceability between previous and current versions indicated?',
         ],
       },
@@ -312,7 +316,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG27',
-        title: 'Include photographs or illustrations of external features, marking, and internal configuration',
+        title:
+          'Include photographs or illustrations of external features, marking, and internal configuration',
         questions: [
           'Are visual elements such as product images, marking, or internal configuration included where applicable?',
           'Are illustrations correctly associated with relevant technical descriptions?',
@@ -344,7 +349,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG31',
-        title: 'Include design specifications, logic, algorithms, key decisions, assumptions, optimisation criteria',
+        title:
+          'Include design specifications, logic, algorithms, key decisions, assumptions, optimisation criteria',
         questions: [
           'Have all technical design elements been clearly and accessibly documented, including algorithms used?',
           'Does the documentation record technical concessions made and how they affect system performance or security?',
@@ -360,7 +366,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG33',
-        title: 'Include data requirements, training methodologies, datasets used, provenance, labelling',
+        title:
+          'Include data requirements, training methodologies, datasets used, provenance, labelling',
         questions: [
           'Have data and methodologies used in training, testing, and validation been documented?',
           'Is there evidence of data quality control and labelling/cleaning processes performed?',
@@ -368,7 +375,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG34',
-        title: 'Include evaluation of human oversight measures and technical measures for output interpretation',
+        title:
+          'Include evaluation of human oversight measures and technical measures for output interpretation',
         questions: [
           'Have measures enabling human oversight of the system during use been evaluated?',
           'Does the documentation include tools or mechanisms designed for users to correctly interpret results?',
@@ -376,15 +384,17 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG35',
-        title: 'Include predetermined changes and associated technical information for continued conformity',
+        title:
+          'Include predetermined changes and associated technical information for continued conformity',
         questions: [
           'Have planned changes that could apply to the system and their technical impact been documented?',
-          'Are validation procedures specified to guarantee these changes don\'t compromise system conformity?',
+          "Are validation procedures specified to guarantee these changes don't compromise system conformity?",
         ],
       },
       {
         code: 'MG36',
-        title: 'Include validation/testing procedures, data used, evaluation parameters, results, and signed records',
+        title:
+          'Include validation/testing procedures, data used, evaluation parameters, results, and signed records',
         questions: [
           'Does the documentation contain clear evidence of tests performed, results, and signed records?',
           'Have specific tests been included to verify effects of planned updates or modifications?',
@@ -400,7 +410,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG38',
-        title: 'Include foreseeable undesirable outcomes and risk sources for health, safety, fundamental rights',
+        title:
+          'Include foreseeable undesirable outcomes and risk sources for health, safety, fundamental rights',
         questions: [
           'Are possible adverse outcomes and risks associated with the system adequately identified and documented?',
           'Does the documentation include mechanisms to mitigate and supervise these risks throughout the lifecycle?',
@@ -408,9 +419,10 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG39',
-        title: 'Include human oversight measures and technical measures for deployer interpretation',
+        title:
+          'Include human oversight measures and technical measures for deployer interpretation',
         questions: [
-          'Have the deployer\'s functions and responsibilities regarding system supervision been clearly specified?',
+          "Have the deployer's functions and responsibilities regarding system supervision been clearly specified?",
           'Has the necessary training or qualification been described for this profile to correctly interpret results?',
         ],
       },
@@ -432,7 +444,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG42',
-        title: 'Include description of relevant changes made by the provider throughout the lifecycle',
+        title:
+          'Include description of relevant changes made by the provider throughout the lifecycle',
         questions: [
           'Has the history of relevant changes the system has undergone from design to current version been recorded?',
           'Is the impact of each change on safety, accuracy, or regulatory compliance indicated?',
@@ -440,23 +453,25 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG43',
-        title: 'Include list of harmonised standards applied (or detailed description of alternative solutions)',
+        title:
+          'Include list of harmonised standards applied (or detailed description of alternative solutions)',
         questions: [
           'Does the documentation clearly specify which harmonised standards or technical standards have been followed?',
-          'Have the solutions adopted been adequately justified where harmonised standards haven\'t been applied?',
+          "Have the solutions adopted been adequately justified where harmonised standards haven't been applied?",
         ],
       },
       {
         code: 'MG44',
         title: 'Include a copy of the EU declaration of conformity per Article 47',
         questions: [
-          'Has a valid copy of the system\'s declaration of conformity been included in the documentation?',
+          "Has a valid copy of the system's declaration of conformity been included in the documentation?",
           'Is it verified that said declaration is signed by the authorised provider and explicitly references Article 47?',
         ],
       },
       {
         code: 'MG45',
-        title: 'Include detailed description of the post-market monitoring system per Article 72(3)',
+        title:
+          'Include detailed description of the post-market monitoring system per Article 72(3)',
         questions: [
           'Has a system for evaluating AI system performance after commercial deployment been defined?',
           'Does the post-market surveillance plan contemplate information collection mechanisms, audits, and continuous improvements?',
@@ -566,7 +581,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         code: 'QMS-14',
         title: 'QMS Proportionality',
         questions: [
-          'Is the quality management system proportionate to the organisation\'s size and the AI system\'s risks?',
+          "Is the quality management system proportionate to the organisation's size and the AI system's risks?",
         ],
       },
       {
@@ -618,8 +633,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         code: 'M-INC-04',
         title: 'Knowledge of the AI system categorisation',
         questions: [
-          'Provider: Prepare the document explaining the AI system\'s category according to those defined in the Regulation.',
-          'Deployer: Access to the document explaining the AI system\'s category according to the Regulation.',
+          "Provider: Prepare the document explaining the AI system's category according to those defined in the Regulation.",
+          "Deployer: Access to the document explaining the AI system's category according to the Regulation.",
         ],
       },
       {
@@ -642,7 +657,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         title: 'Analysis and definition of internal and external context',
         questions: [
           'Has a risk management system been defined for high-risk AI systems throughout the entire lifecycle?',
-          'Have the elements of the organisation\'s internal and external context around high-risk AI systems been identified and documented?',
+          "Have the elements of the organisation's internal and external context around high-risk AI systems been identified and documented?",
           'Has leadership and commitment to risk management been formalised (policies, procedures, resources, authority, accountability)?',
         ],
       },
@@ -771,16 +786,12 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       {
         code: 'MG03',
         title: 'Determine quality dimensions to evaluate',
-        questions: [
-          'Have data quality dimensions to evaluate been defined?',
-        ],
+        questions: ['Have data quality dimensions to evaluate been defined?'],
       },
       {
         code: 'MG04',
         title: 'Define quality controls for each dimension',
-        questions: [
-          'Have specific quality controls been defined for each identified dimension?',
-        ],
+        questions: ['Have specific quality controls been defined for each identified dimension?'],
       },
       {
         code: 'MG05',
@@ -809,9 +820,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       {
         code: 'MG08',
         title: 'Data transformation',
-        questions: [
-          'Have data been transformed to adapt them to AI system needs?',
-        ],
+        questions: ['Have data been transformed to adapt them to AI system needs?'],
       },
       {
         code: 'MG09',
@@ -824,9 +833,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       {
         code: 'MG10',
         title: 'Data sampling',
-        questions: [
-          'Is adequate data sampling performed?',
-        ],
+        questions: ['Is adequate data sampling performed?'],
       },
       {
         code: 'MG11',
@@ -839,9 +846,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       {
         code: 'MG12',
         title: 'Data enrichment',
-        questions: [
-          'Have data been enriched and expanded?',
-        ],
+        questions: ['Have data been enriched and expanded?'],
       },
       {
         code: 'MG13',
@@ -885,7 +890,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         title: 'Total or partial data deletion',
         questions: [
           'Has it been verified that no user or actor involved in AI system development still requires data access?',
-          'Has it been verified that the data deletion process won\'t violate any legal, contractual, or retention obligation?',
+          "Has it been verified that the data deletion process won't violate any legal, contractual, or retention obligation?",
           'Has it been verified that data will be deleted from all storage locations?',
           'Has it been evaluated whether there is any possibility of partial or total data restoration from the AI system trained with this data?',
           'Has it been checked whether the data has cultural, social, or historical importance?',
@@ -903,8 +908,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         code: 'MG01',
         title: 'Selection of accuracy metrics according to intended purpose',
         questions: [
-          'In selecting accuracy metrics and their values, has the system\'s intended purpose been considered?',
-          'Has the correspondence between each selected metric and the system\'s intended use been documented traceably?',
+          "In selecting accuracy metrics and their values, has the system's intended purpose been considered?",
+          "Has the correspondence between each selected metric and the system's intended use been documented traceably?",
           'Has it been validated that chosen metrics correctly reflect expected performance in real application contexts?',
         ],
       },
@@ -974,7 +979,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         code: 'MG09',
         title: 'Objective function',
         questions: [
-          'Has the system\'s objective function been selected according to its intended purpose?',
+          "Has the system's objective function been selected according to its intended purpose?",
           'Have risks found in the risk analysis been considered and how system accuracy influences them?',
         ],
       },
@@ -983,7 +988,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         title: 'Interface/Alarm for user accuracy monitoring',
         questions: [
           'Does the system have a mechanism (graphical interface, alarm, etc.) that allows the user to monitor accuracy status?',
-          'Is the mechanism\'s functioning appropriately documented?',
+          "Is the mechanism's functioning appropriately documented?",
           'Have users been trained to correctly interpret the information?',
         ],
       },
@@ -1019,7 +1024,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         code: 'MG14',
         title: 'Accuracy instructions for the user',
         questions: [
-          'Do the system\'s user instructions include all pertinent accuracy levels and metrics?',
+          "Do the system's user instructions include all pertinent accuracy levels and metrics?",
           'Are metrics presented in an accessible and comprehensible format for non-technical users?',
         ],
       },
@@ -1058,7 +1063,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG04',
-        title: 'Identify logs needed to evidence Article 9 (Risk Management) information collection',
+        title:
+          'Identify logs needed to evidence Article 9 (Risk Management) information collection',
         questions: [
           'Have the logs necessary to guarantee collection of information determined in the risk management system implementation process been generated?',
           'Have risk management system controls with associated evidence been considered for obtaining logs?',
@@ -1066,7 +1072,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG05',
-        title: 'Identify logs needed to evidence Article 72 (Post-Market Surveillance) information collection',
+        title:
+          'Identify logs needed to evidence Article 72 (Post-Market Surveillance) information collection',
         questions: [
           'Have the logs necessary to guarantee collection of information determined in the post-market surveillance system implementation process been generated?',
           'Have the frequencies for collecting these records been adequately documented and implemented?',
@@ -1074,7 +1081,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG06',
-        title: 'Identify logs needed to evidence Article 14 (Human Oversight) information collection',
+        title:
+          'Identify logs needed to evidence Article 14 (Human Oversight) information collection',
         questions: [
           'Have the logs necessary to guarantee collection of information determined for implementing human oversight mechanisms been generated?',
           'Has the need for these records and how to interpret their results for contribution to the human oversight process been adequately documented?',
@@ -1131,7 +1139,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG13',
-        title: 'Establish a continuous monitoring and improvement process for the log management system',
+        title:
+          'Establish a continuous monitoring and improvement process for the log management system',
         questions: [
           'Has a continuous monitoring and improvement process for the log management system been established?',
           'In the established process, are possible errors monitored and identified, and are recorded data evaluated for implementation and continuous improvement of proposed solutions?',
@@ -1139,7 +1148,8 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG14',
-        title: 'Implement a process guaranteeing adequate technical documentation of the log management system',
+        title:
+          'Implement a process guaranteeing adequate technical documentation of the log management system',
         questions: [
           'Has a process been defined and implemented that guarantees adequate technical documentation of the implemented log management system?',
           'Have logs been contemplated in documentation not only specifically about logs, but also in other documents where they appear collaterally (e.g., risk management, human oversight, post-market surveillance)?',
@@ -1259,21 +1269,24 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG14',
-        title: 'For continuously learning systems: Ensure robustness, accuracy, and performance don\'t degrade',
+        title:
+          "For continuously learning systems: Ensure robustness, accuracy, and performance don't degrade",
         questions: [
           'For systems that continue learning, are all established metrics (including accuracy and cybersecurity) monitored to determine if the system remains within design parameters?',
         ],
       },
       {
         code: 'MG15',
-        title: 'For continuously learning systems: Adopt mitigation strategies to minimise model deviation and prevent bias accumulation',
+        title:
+          'For continuously learning systems: Adopt mitigation strategies to minimise model deviation and prevent bias accumulation',
         questions: [
           'Have monitoring and control plans been established, with action measures for model degradation based on model deviation, concept drift, data drift, etc.?',
         ],
       },
       {
         code: 'MG16',
-        title: 'For continuously learning systems: Formally register interaction and interoperability cases with other systems or humans',
+        title:
+          'For continuously learning systems: Formally register interaction and interoperability cases with other systems or humans',
         questions: [
           'Are interactions, interoperability, and feedback received during the lifecycle formally registered, especially in continuously learning systems, to ensure traceability and improve robustness?',
         ],
@@ -1332,16 +1345,14 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         code: 'MG05',
         title: 'Human in/on the loop',
         questions: [
-          'In the system\'s governance model, has the system\'s level of autonomy been contemplated, detailing the moment in the process at which the responsible person(s) intervene?',
+          "In the system's governance model, has the system's level of autonomy been contemplated, detailing the moment in the process at which the responsible person(s) intervene?",
           'Does the system have agile mechanisms for the responsible person to interrupt its functioning?',
         ],
       },
       {
         code: 'MG06',
         title: 'Risk management',
-        questions: [
-          'Does the system have an associated risk management plan?',
-        ],
+        questions: ['Does the system have an associated risk management plan?'],
       },
       {
         code: 'MG07',
@@ -1382,11 +1393,11 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG03',
-        title: 'Ensure the system\'s functional objective',
+        title: "Ensure the system's functional objective",
         questions: [
           'Does the system provide information about foreseeable circumstances where it could be used for purposes other than intended?',
           'Is the system accompanied by a risk plan for such uses?',
-          'Does the system have an associated procedure to supervise that such uses don\'t occur during operation?',
+          "Does the system have an associated procedure to supervise that such uses don't occur during operation?",
         ],
       },
       {
@@ -1419,7 +1430,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         code: 'MG07',
         title: 'Manage complexity',
         questions: [
-          'Can the AI system\'s technical complexity be blocking for Transparency needs in any circumstance?',
+          "Can the AI system's technical complexity be blocking for Transparency needs in any circumstance?",
           'For black-box models: Does the provider supply tools that enable Transparency about the system?',
         ],
       },
@@ -1462,16 +1473,12 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       {
         code: 'MG13',
         title: 'Article 9: Risk management system',
-        questions: [
-          'Does the system have an associated risk management plan?',
-        ],
+        questions: ['Does the system have an associated risk management plan?'],
       },
       {
         code: 'MG14',
         title: 'Article 14: Human oversight',
-        questions: [
-          'Does the system comply with Human Oversight measures?',
-        ],
+        questions: ['Does the system comply with Human Oversight measures?'],
       },
       {
         code: 'MG15',
@@ -1555,9 +1562,10 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
       },
       {
         code: 'MG08',
-        title: 'Consider anomalous scenarios that could affect the surveillance system\'s own performance',
+        title:
+          "Consider anomalous scenarios that could affect the surveillance system's own performance",
         questions: [
-          'Have possible anomalous scenarios that could compromise the surveillance system\'s performance been identified and documented?',
+          "Have possible anomalous scenarios that could compromise the surveillance system's performance been identified and documented?",
           'Are there contingency plans and specific measures to manage each of these scenarios?',
         ],
       },
@@ -1575,7 +1583,7 @@ export const REPORTING_CHECKLIST: ChecklistArea[] = [
         title: 'Assign a response team',
         questions: [
           'Has a specific, duly trained team been formed to respond to alerts and incidents detected by the surveillance system?',
-          'Are the response team\'s roles and responsibilities clearly defined and communicated?',
+          "Are the response team's roles and responsibilities clearly defined and communicated?",
         ],
       },
       {

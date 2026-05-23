@@ -136,8 +136,8 @@ export function ChatPage() {
               </div>
               <h2 className="mb-2 text-2xl font-semibold">Hi, I'm Norma! How can I help you?</h2>
               <p className="text-muted-foreground mb-8 max-w-lg text-center text-sm">
-                Ask me about EU AI Act compliance, your project's risk
-                classification, or any regulatory questions.
+                Ask me about EU AI Act compliance, your project's risk classification, or any
+                regulatory questions.
               </p>
               <div className="flex max-w-lg flex-col items-center gap-2">
                 {SUGGESTED_QUESTIONS.map((q) => (
@@ -162,19 +162,19 @@ export function ChatPage() {
                       ref={idx === lastUserIdx ? lastUserMsgRef : undefined}
                       className="flex justify-end"
                     >
-                    <div className="bg-muted max-w-[80%] rounded-2xl rounded-tr-sm px-4 py-3 text-sm">
-                      {msg.content}
+                      <div className="bg-muted max-w-[80%] rounded-2xl rounded-tr-sm px-4 py-3 text-sm">
+                        {msg.content}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div key={msg.id} className="flex items-start gap-3">
-                    <div className="bg-muted mt-1 flex size-8 shrink-0 items-center justify-center rounded-full">
-                      <MessageSquare className="text-muted-foreground size-4" />
+                  ) : (
+                    <div key={msg.id} className="flex items-start gap-3">
+                      <div className="bg-muted mt-1 flex size-8 shrink-0 items-center justify-center rounded-full">
+                        <MessageSquare className="text-muted-foreground size-4" />
+                      </div>
+                      <div className="prose prose-sm dark:prose-invert max-w-none flex-1 text-foreground">
+                        <Markdown>{msg.content}</Markdown>
+                      </div>
                     </div>
-                    <div className="prose prose-sm dark:prose-invert max-w-none flex-1 text-foreground">
-                      <Markdown>{msg.content}</Markdown>
-                    </div>
-                  </div>
                   ),
                 );
               })()}

@@ -156,9 +156,7 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
                 <Card>
                   <CardHeader>
                     <CardTitle>Deployment Context</CardTitle>
-                    <CardDescription>
-                      Where and how will the system be deployed?
-                    </CardDescription>
+                    <CardDescription>Where and how will the system be deployed?</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Textarea

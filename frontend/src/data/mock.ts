@@ -123,8 +123,7 @@ export const MANDATORY_DOCUMENTS: MandatoryDocument[] = [
   {
     id: '8',
     name: 'Automated Logs / Records',
-    description:
-      'Must be retained at least 6 months and made available for regulatory review.',
+    description: 'Must be retained at least 6 months and made available for regulatory review.',
     article: 'Art. 12',
     framework: 'EU AI Act',
     uploaded: true,
