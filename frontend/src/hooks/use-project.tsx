@@ -5,7 +5,7 @@ export interface ProjectContextValue {
   projects: Project[];
   currentProject: Project | null;
   setCurrentProject: (project: Project) => void;
-  createProject: (name: string, description: string) => Project;
+  createProject: (data: Omit<Project, 'id' | 'riskClassification'>) => Project;
 }
 
 export const ProjectContext = createContext<ProjectContextValue | null>(null);

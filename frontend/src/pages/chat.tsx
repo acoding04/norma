@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import { MessageSquare, Send, SquarePen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -35,6 +36,7 @@ const MOCK_RESPONSES: Record<string, string> = {
 };
 
 export function ChatPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -42,6 +44,7 @@ export function ChatPage() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const lastUserMsgRef = useRef<HTMLDivElement>(null);
   const shouldScrollRef = useRef(false);
+  const initialSentRef = useRef(false);
 
   useEffect(() => {
     if (shouldScrollRef.current && lastUserMsgRef.current) {
@@ -84,6 +87,15 @@ export function ChatPage() {
     },
     [isTyping],
   );
+
+  useEffect(() => {
+    const q = searchParams.get('q');
+    if (q && !initialSentRef.current) {
+      initialSentRef.current = true;
+      setSearchParams({}, { replace: true });
+      sendMessage(q);
+    }
+  }, [searchParams, setSearchParams, sendMessage]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {

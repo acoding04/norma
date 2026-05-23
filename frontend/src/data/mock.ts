@@ -3,18 +3,18 @@ export interface Project {
   name: string;
   description: string;
   riskClassification: 'unacceptable' | 'high' | 'limited' | 'minimal';
-  motivation: string;
-  scope: string;
-  vision: string;
+  intendedPurpose: string;
+  intendedUsers: string;
+  deploymentContext: string;
 }
 
-export interface Document {
+export interface MandatoryDocument {
   id: string;
   name: string;
-  type: 'policy' | 'technical' | 'assessment' | 'report';
+  description: string;
+  article: string;
   framework: string;
-  uploadedAt: string;
-  size: string;
+  uploaded: boolean;
 }
 
 export interface Integration {
@@ -47,63 +47,132 @@ export const MOCK_PROJECTS: Project[] = [
     name: 'Sample Project',
     description: 'AI-powered predictive maintenance system for industrial equipment monitoring.',
     riskClassification: 'high',
-    motivation:
-      'Reduce unplanned downtime and maintenance costs by predicting component failures before they occur using sensor data and machine learning models.',
-    scope:
-      'Covers turbine engines, landing gear, and avionics systems. Integrates with existing MRO workflows and CMMS platforms.',
-    vision:
-      'Achieve 95% prediction accuracy for critical component failures within a 30-day window, reducing unplanned events by 40%.',
+    intendedPurpose:
+      'Predict component failures before they occur using sensor data and machine learning models, reducing unplanned downtime and maintenance costs.',
+    intendedUsers:
+      'Maintenance engineers, operations managers, and automated monitoring systems. Affected persons include field technicians who act on system recommendations.',
+    deploymentContext:
+      'Deployed on-premise within industrial facilities across EU member states. Integrates with existing MRO workflows and CMMS platforms.',
   },
 ];
 
-export const MOCK_DOCUMENTS: Document[] = [
+export const MANDATORY_DOCUMENTS: MandatoryDocument[] = [
   {
     id: '1',
-    name: 'Risk Assessment Report',
-    type: 'assessment',
+    name: 'Technical Documentation',
+    description:
+      'Must be compiled before market entry and retained for 10 years. Must be immediately available to market surveillance authorities upon request.',
+    article: 'Annex IV',
     framework: 'EU AI Act',
-    uploadedAt: '2025-01-15',
-    size: '2.4 MB',
+    uploaded: true,
   },
   {
     id: '2',
-    name: 'Data Processing Impact Assessment',
-    type: 'assessment',
+    name: 'EU Declaration of Conformity',
+    description:
+      'A signed written declaration that the system conforms to the Act. Retained 10 years, translated into the language of the Member State.',
+    article: 'Art. 47, Annex V',
     framework: 'EU AI Act',
-    uploadedAt: '2025-01-20',
-    size: '1.8 MB',
+    uploaded: false,
   },
   {
     id: '3',
-    name: 'Model Transparency Report',
-    type: 'report',
+    name: 'CE Marking',
+    description:
+      'Visible on the product or interface. For digital systems, a digital CE marking accessible from the interface.',
+    article: 'Art. 48',
     framework: 'EU AI Act',
-    uploadedAt: '2025-02-01',
-    size: '3.1 MB',
+    uploaded: false,
   },
   {
     id: '4',
-    name: 'AI System Technical Documentation',
-    type: 'technical',
+    name: 'EU Database Registration',
+    description:
+      'System details must be registered in the centralized EU database for public traceability.',
+    article: 'Art. 71',
     framework: 'EU AI Act',
-    uploadedAt: '2025-02-10',
-    size: '5.6 MB',
+    uploaded: false,
   },
   {
     id: '5',
-    name: 'Data Governance Policy',
-    type: 'policy',
-    framework: 'Internal Guidelines',
-    uploadedAt: '2025-02-15',
-    size: '890 KB',
+    name: 'Quality Management System Documentation',
+    description:
+      'The 13-element QMS covering design, testing, risk management, incident response, etc. Must be fully documented and available to authorities.',
+    article: 'Art. 17',
+    framework: 'EU AI Act',
+    uploaded: true,
   },
   {
     id: '6',
-    name: 'Privacy Notice',
-    type: 'policy',
+    name: 'Post-Market Surveillance Plan',
+    description:
+      'Forms part of the technical documentation. Must document the monitoring system and indicators.',
+    article: 'Art. 72',
     framework: 'EU AI Act',
-    uploadedAt: '2025-03-01',
-    size: '420 KB',
+    uploaded: false,
+  },
+  {
+    id: '7',
+    name: 'Serious Incident Reports',
+    description:
+      'Must be reported to the market surveillance authority within 2 days (systemic), 10 days (death), or 15 days (other serious incidents).',
+    article: 'Art. 73',
+    framework: 'EU AI Act',
+    uploaded: false,
+  },
+  {
+    id: '8',
+    name: 'Automated Logs / Records',
+    description:
+      'Must be retained at least 6 months and made available for regulatory review.',
+    article: 'Art. 12',
+    framework: 'EU AI Act',
+    uploaded: true,
+  },
+  {
+    id: '9',
+    name: 'Fundamental Rights Impact Assessment',
+    description:
+      'Required for public-sector deployers or private entities providing public services. Results must be notified to the national market surveillance authority before deployment.',
+    article: 'Art. 27',
+    framework: 'EU AI Act',
+    uploaded: false,
+  },
+  {
+    id: '10',
+    name: 'Filter Assessment Documentation',
+    description:
+      'For systems claiming the Article 6(3) exemption: why the system would normally be high-risk, which filter condition applies, and proof it does not perform profiling.',
+    article: 'Art. 6(3)',
+    framework: 'EU AI Act',
+    uploaded: false,
+  },
+  {
+    id: '11',
+    name: 'Internal Governance Policy',
+    description:
+      'Company-specific policy defining AI governance structure, roles, responsibilities, and escalation procedures.',
+    article: '',
+    framework: 'Internal AI Guidelines',
+    uploaded: true,
+  },
+  {
+    id: '12',
+    name: 'Ethics Review Report',
+    description:
+      'Documented ethical review of the AI system covering fairness, accountability, and societal impact.',
+    article: '',
+    framework: 'Internal AI Guidelines',
+    uploaded: false,
+  },
+  {
+    id: '13',
+    name: 'Bias Testing Report',
+    description:
+      'Results of bias detection and mitigation testing across protected attributes and demographic groups.',
+    article: '',
+    framework: 'Internal AI Guidelines',
+    uploaded: false,
   },
 ];
 
@@ -147,38 +216,3 @@ export const SUGGESTED_QUESTIONS = [
   'What documents are we missing for conformity assessment?',
   'Explain Article 14 human oversight requirements',
 ];
-
-export interface ReportingQuestion {
-  id: string;
-  question: string;
-  answer: string;
-}
-
-export const MOCK_REPORTING_TAB1: ReportingQuestion[] = [
-  {
-    id: '1',
-    question: 'What is the intended purpose of the AI system?',
-    answer: '',
-  },
-  {
-    id: '2',
-    question: 'Who are the intended users and affected persons?',
-    answer: '',
-  },
-  {
-    id: '3',
-    question: 'What data is used for training and inference?',
-    answer: '',
-  },
-  {
-    id: '4',
-    question: 'How is human oversight implemented?',
-    answer: '',
-  },
-  {
-    id: '5',
-    question: 'What measures ensure accuracy and robustness?',
-    answer: '',
-  },
-];
-

@@ -25,7 +25,7 @@ export function IntegrationsPage() {
       <PageHeader title="Integrations" />
 
       <div className="flex-1 overflow-auto p-6">
-        <div className="mx-auto max-w-2xl space-y-4">
+        <div className="mx-auto max-w-4xl space-y-4">
           {integrations.map((integration) => {
             const Icon = ICON_MAP[integration.icon];
             return (

@@ -7,15 +7,11 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
   const [currentProject, setCurrentProject] = useState<Project | null>(MOCK_PROJECTS[0] ?? null);
 
   const createProject = useCallback(
-    (name: string, description: string) => {
+    (data: Omit<Project, 'id' | 'riskClassification'>) => {
       const project: Project = {
         id: String(projects.length + 1),
-        name,
-        description,
         riskClassification: 'minimal',
-        motivation: '',
-        scope: '',
-        vision: '',
+        ...data,
       };
       setProjects((prev) => [...prev, project]);
       setCurrentProject(project);

@@ -8,7 +8,6 @@ import { DescriptionPage } from '@/pages/description';
 import { DocumentsPage } from '@/pages/documents';
 import { FrameworksPage } from '@/pages/frameworks';
 import { IntegrationsPage } from '@/pages/integrations';
-import { NewProjectPage } from '@/pages/new-project';
 import { ReportingPage } from '@/pages/reporting';
 import { SettingsPage } from '@/pages/settings';
 
@@ -28,7 +27,6 @@ function App() {
                 <Route path="integrations" element={<IntegrationsPage />} />
                 <Route path="frameworks" element={<FrameworksPage />} />
                 <Route path="settings" element={<SettingsPage />} />
-                <Route path="new-project" element={<NewProjectPage />} />
               </Route>
             </Routes>
           </TooltipProvider>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   BookOpen,
@@ -33,6 +34,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { NewProjectDialog } from '@/components/new-project-dialog';
 import { useProject } from '@/hooks/use-project';
 
 const RISK_LABELS: Record<string, string> = {
@@ -59,15 +61,17 @@ export function AppSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { projects, currentProject, setCurrentProject } = useProject();
+  const [newProjectOpen, setNewProjectOpen] = useState(false);
 
   return (
+    <>
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" className="pointer-events-none justify-center overflow-visible">
-              <span className="border-primary border-b-2 pb-1 text-2xl font-semibold group-data-[collapsible=icon]:hidden">Norma</span>
-              <span className="border-primary hidden border-b-2 pb-1 text-2xl font-semibold group-data-[collapsible=icon]:block">N</span>
+              <span className="text-2xl font-semibold group-data-[collapsible=icon]:hidden">Norma</span>
+              <span className="hidden text-2xl font-semibold group-data-[collapsible=icon]:block">N</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -105,7 +109,7 @@ export function AppSidebar() {
                   </DropdownMenuItem>
                 ))}
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => navigate('/new-project')}>
+                <DropdownMenuItem onClick={() => setNewProjectOpen(true)}>
                   <Plus className="mr-2 size-4" />
                   New Project
                 </DropdownMenuItem>
@@ -212,5 +216,8 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
+
+    <NewProjectDialog open={newProjectOpen} onOpenChange={setNewProjectOpen} />
+    </>
   );
 }

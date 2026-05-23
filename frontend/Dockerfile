@@ -12,7 +12,7 @@ RUN --mount=type=secret,id=ca_cert \
     fi && \
     npm config set registry "$NPM_REGISTRY"
 
-COPY package.json package-lock.json* ./
+COPY package.json ./
 RUN npm install
 COPY . .
 RUN npm run build

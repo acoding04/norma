@@ -27,7 +27,7 @@ export function FrameworksPage() {
       <PageHeader title="Frameworks" />
 
       <div className="flex-1 overflow-auto p-6">
-        <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {MOCK_FRAMEWORKS.map((fw) => (
             <Card
               key={fw.id}
