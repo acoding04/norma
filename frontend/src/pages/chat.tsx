@@ -5,7 +5,9 @@ import { MessageSquare, Send, SquarePen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { type ChatMessage, SUGGESTED_QUESTIONS } from '@/data/mock';
+import { useProject } from '@/hooks/use-project';
+import { api, type ChatMessage, type ChatSession } from '@/lib/api';
+import { SUGGESTED_QUESTIONS } from '@/data/mock';
 
 function TypingIndicator() {
   return (
@@ -24,19 +26,10 @@ function TypingIndicator() {
   );
 }
 
-const MOCK_RESPONSES: Record<string, string> = {
-  'What risk level is our project under the EU AI Act?':
-    "Based on the project description for **Finrisk**, this system would fall under **unacceptable risk** classification according to the EU AI Act.\n\nUnacceptable risk AI systems include those used for social scoring by governments, real-time biometric surveillance, and certain financial risk scoring that can discriminate against vulnerable groups. Key factors:\n\n- The system performs automated credit scoring decisions\n- It processes sensitive financial data that can affect livelihoods\n- Potential for discriminatory outcomes without adequate safeguards\n\nYou'll need to carefully evaluate whether specific use cases can be redesigned to fall under high-risk with appropriate mitigations, or whether certain applications must be prohibited.",
-  'Summarize our compliance gaps':
-    "Here's a summary of compliance gaps for your **Sample Project**:\n\n**Critical Gaps:**\n- **Risk Assessment** — Risk assessment for the AI system has been started but not finalized\n- **Data Quality Management** — No documented process for data quality validation in the training pipeline\n- **AI System Lifecycle** — Missing documentation on model monitoring and retraining triggers\n\n**Partial Compliance:**\n- AI Management Policy exists but needs updating for the new predictive maintenance module\n- Roles and responsibilities defined but oversight committee not yet established\n\n**Recommendations:**\n1. Complete the AI risk assessment with focus on operational impact\n2. Establish a formal AI oversight committee with defined review cadence\n3. Document data quality requirements and validation procedures for all data sources",
-  'What documents are we missing for conformity assessment?':
-    "For a conformity assessment under the EU AI Act, you're missing the following key documents:\n\n**Required but Missing:**\n1. **Human Oversight Plan** (Article 14) — Procedures for human intervention and monitoring of automated decisions\n2. **Conformity Assessment Report** — Formal self-assessment or third-party evaluation\n3. **Post-Market Monitoring Plan** — Ongoing surveillance of system performance\n\n**Needs Updating:**\n4. **Risk Assessment Report** — Current version doesn't cover the new fraud detection module\n5. **Technical Documentation** — Missing model validation results and bias testing reports\n\n**Available (3 of 8 required):**\n- Risk Assessment Report (partial)\n- Data Processing Impact Assessment\n- Model Transparency Report\n\nI'd recommend prioritizing the Human Oversight Plan and completing the Risk Assessment update first.",
-  'Explain Article 14 human oversight requirements':
-    "**Article 14 — Human Oversight** is a key requirement for high-risk AI systems under the EU AI Act.\n\n**Core Requirements:**\n- High-risk AI systems must be designed to allow effective human oversight during use\n- Natural persons assigned to oversight must be able to fully understand the system's capabilities and limitations\n- Oversight measures must be proportionate to the risks and level of autonomy\n\n**Specific Obligations:**\n1. **Interpretability** — Users must be able to interpret outputs and decide when/how to use them\n2. **Intervention** — Ability to override, reverse, or stop the system's operation\n3. **Alert mechanisms** — System must flag anomalies, errors, or unexpected behavior\n4. **Training** — Persons overseeing the system must have adequate training and competence\n\n**For Your Project:**\nGiven Finrisk's unacceptable risk classification, you need to evaluate whether the system can be redesigned with sufficient human oversight to qualify under a lower risk category, or whether certain use cases must be discontinued.",
-};
-
 export function ChatPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { currentProject } = useProject();
+  const [session, setSession] = useState<ChatSession | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -48,44 +41,128 @@ export function ChatPage() {
 
   useEffect(() => {
     if (shouldScrollRef.current && lastUserMsgRef.current) {
+      shouldScrollRef.current = false;
       requestAnimationFrame(() => {
         lastUserMsgRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
       });
-      shouldScrollRef.current = false;
     }
   }, [messages]);
 
+  const createSession = useCallback(async () => {
+    if (!currentProject) return null;
+    try {
+      const newSession = await api.post<ChatSession>('/chat/sessions', {
+        project_id: currentProject.id,
+      });
+      setSession(newSession);
+      setMessages([]);
+      return newSession;
+    } catch {
+      return null;
+    }
+  }, [currentProject]);
+
   const sendMessage = useCallback(
-    (text: string) => {
-      if (!text.trim() || isTyping) return;
+    async (text: string) => {
+      if (!text.trim() || isTyping || !currentProject) return;
+
+      let currentSession = session;
+      if (!currentSession) {
+        currentSession = await createSession();
+        if (!currentSession) return;
+      }
 
       const userMsg: ChatMessage = {
         id: crypto.randomUUID(),
         role: 'user',
         content: text.trim(),
-        timestamp: new Date().toISOString(),
+        created_at: new Date().toISOString(),
       };
       setMessages((prev) => [...prev, userMsg]);
       setInput('');
       setIsTyping(true);
       shouldScrollRef.current = true;
 
-      setTimeout(() => {
-        const response =
-          MOCK_RESPONSES[text.trim()] ??
-          "I'd be happy to help with that. Based on your project's current compliance status, I can provide detailed guidance. Could you provide more specific details about what aspect you'd like to explore?";
+      const streamingMsg: ChatMessage = {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        content: '',
+        created_at: new Date().toISOString(),
+      };
 
-        const assistantMsg: ChatMessage = {
-          id: crypto.randomUUID(),
-          role: 'assistant',
-          content: response,
-          timestamp: new Date().toISOString(),
-        };
-        setMessages((prev) => [...prev, assistantMsg]);
+      try {
+        const token = localStorage.getItem('norma-token');
+        const res = await fetch(`/api/chat/sessions/${currentSession.id}/messages/stream`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({ content: text.trim() }),
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        const reader = res.body!.getReader();
+        const decoder = new TextDecoder();
+        let sseBuffer = '';
+        let started = false;
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          sseBuffer += decoder.decode(value, { stream: true });
+          const events = sseBuffer.split('\n\n');
+          sseBuffer = events.pop() ?? '';
+
+          for (const event of events) {
+            const trimmed = event.trim();
+            if (!trimmed.startsWith('data: ')) continue;
+            const raw = trimmed.slice(6);
+            if (raw === '[DONE]') continue;
+
+            try {
+              streamingMsg.content += JSON.parse(raw);
+            } catch {
+              streamingMsg.content += raw;
+            }
+
+            if (!started) {
+              started = true;
+              setIsTyping(false);
+              setMessages((prev) => [...prev, { ...streamingMsg }]);
+            } else {
+              setMessages((prev) =>
+                prev.map((m) => (m.id === streamingMsg.id ? { ...streamingMsg } : m)),
+              );
+            }
+            await new Promise((r) => requestAnimationFrame(r));
+          }
+        }
+      } catch {
+        if (streamingMsg.content) {
+          setMessages((prev) =>
+            prev.map((m) => (m.id === streamingMsg.id ? { ...streamingMsg } : m)),
+          );
+        } else {
+          const errorMsg: ChatMessage = {
+            id: streamingMsg.id,
+            role: 'assistant',
+            content: "I'm sorry, I encountered an error processing your request. Please try again.",
+            created_at: new Date().toISOString(),
+          };
+          setMessages((prev) =>
+            streamingMsg.content === ''
+              ? [...prev, errorMsg]
+              : prev.map((m) => (m.id === streamingMsg.id ? errorMsg : m)),
+          );
+        }
+      } finally {
         setIsTyping(false);
-      }, 1500);
+      }
     },
-    [isTyping],
+    [isTyping, currentProject, session, createSession],
   );
 
   useEffect(() => {
@@ -104,6 +181,13 @@ export function ChatPage() {
     }
   };
 
+  const handleNewChat = () => {
+    setSession(null);
+    setMessages([]);
+    setIsTyping(false);
+    initialSentRef.current = false;
+  };
+
   const isEmpty = messages.length === 0;
 
   return (
@@ -115,10 +199,7 @@ export function ChatPage() {
           variant="ghost"
           size="sm"
           className="ml-auto cursor-pointer"
-          onClick={() => {
-            setMessages([]);
-            setIsTyping(false);
-          }}
+          onClick={handleNewChat}
         >
           <SquarePen className="mr-1 size-4" />
           New chat
@@ -152,7 +233,7 @@ export function ChatPage() {
               </div>
             </div>
           ) : (
-            <div className="mx-auto max-w-3xl space-y-6 px-4 py-8">
+            <div className="mx-auto max-w-3xl space-y-6 px-4 pb-[60vh] pt-8">
               {(() => {
                 const lastUserIdx = messages.findLastIndex((m) => m.role === 'user');
                 return messages.map((msg, idx) =>
@@ -160,7 +241,7 @@ export function ChatPage() {
                     <div
                       key={msg.id}
                       ref={idx === lastUserIdx ? lastUserMsgRef : undefined}
-                      className="flex justify-end"
+                      className="scroll-mt-10 flex justify-end"
                     >
                       <div className="bg-muted max-w-[80%] rounded-2xl rounded-tr-sm px-4 py-3 text-sm">
                         {msg.content}

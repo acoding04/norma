@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { NormaLogo } from '@/components/icons/norma-logo';
 import {
   BookOpen,
   ChevronsUpDown,
@@ -84,11 +85,12 @@ export function AppSidebar() {
                 size="lg"
                 className="pointer-events-none justify-center overflow-visible"
               >
-                <span className="text-2xl font-semibold group-data-[collapsible=icon]:hidden">
+                <NormaLogo className="!size-7 shrink-0" />
+                <span
+                  className="text-2xl font-medium group-data-[collapsible=icon]:hidden"
+                  style={{ fontFamily: 'var(--font-logo)' }}
+                >
                   Norma
-                </span>
-                <span className="hidden text-2xl font-semibold group-data-[collapsible=icon]:block">
-                  N
                 </span>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -113,8 +115,8 @@ export function AppSidebar() {
                       {currentProject?.name ?? 'No project'}
                     </span>
                     <span className="text-sidebar-foreground truncate text-xs">
-                      {currentProject?.riskClassification
-                        ? RISK_LABELS[currentProject.riskClassification]
+                      {currentProject?.risk_classification
+                        ? RISK_LABELS[currentProject.risk_classification]
                         : 'Select a project'}
                     </span>
                   </div>
@@ -127,8 +129,12 @@ export function AppSidebar() {
                   sideOffset={4}
                 >
                   {projects.map((project) => (
-                    <DropdownMenuItem key={project.id} onClick={() => setCurrentProject(project)}>
-                      {project.name}
+                    <DropdownMenuItem
+                      key={project.id}
+                      onClick={() => setCurrentProject(project)}
+                      className="truncate"
+                    >
+                      <span className="truncate">{project.name}</span>
                     </DropdownMenuItem>
                   ))}
                   <DropdownMenuSeparator />
