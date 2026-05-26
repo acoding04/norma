@@ -1,5 +1,6 @@
 from google.adk.agents import Agent
 from google.adk.models.lite_llm import LiteLlm
+from google.genai import types
 
 from app.core.config import settings
 
@@ -82,5 +83,5 @@ def create_norma_agent(system_prompt: str) -> Agent:
         model=LiteLlm(model=settings.litellm_model),
         name="norma",
         instruction=system_prompt,
-        generate_content_config={"temperature": 0.2},
+        generate_content_config=types.GenerateContentConfig(temperature=0.2),
     )
