@@ -28,12 +28,9 @@ async def process_github_data(body: ProcessRequest):
         raise HTTPException(status_code=400, detail="Invalid integration_id") from e
 
     tasks_query = text(
-        "SELECT github_id, title, body, status, assignees, labels"
-        " FROM github_tasks WHERE integration_id = :id"
+        "SELECT github_id, title, body, status, assignees, labels FROM github_tasks WHERE integration_id = :id"
     )
-    files_query = text(
-        "SELECT file_path, content FROM github_repo_files WHERE integration_id = :id"
-    )
+    files_query = text("SELECT file_path, content FROM github_repo_files WHERE integration_id = :id")
 
     db = SessionLocal()
     try:

@@ -212,7 +212,7 @@ async def sync_integration(
                         raise
                     import asyncio
 
-                    await asyncio.sleep(2 ** attempt)
+                    await asyncio.sleep(2**attempt)
 
         db.refresh(integration)
         return SyncResponse(status=integration.sync_status, message="Sync completed")

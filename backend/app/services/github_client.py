@@ -20,6 +20,7 @@ def _ssl_context() -> ssl.SSLContext | bool:
         return ctx
     return True
 
+
 KEY_FILE_NAMES = {
     "README.md",
     "readme.md",
@@ -76,18 +77,20 @@ async def fetch_issues(pat: str, owner: str, repo: str) -> list[dict]:
             for item in batch:
                 if item.get("pull_request"):
                     continue
-                issues.append({
-                    "github_id": item["number"],
-                    "title": item["title"],
-                    "body": (item.get("body") or "")[:2000],
-                    "status": item["state"],
-                    "assignees": [a["login"] for a in item.get("assignees", [])],
-                    "labels": [lbl["name"] for lbl in item.get("labels", [])],
-                    "milestone": item["milestone"]["title"] if item.get("milestone") else None,
-                    "github_url": item["html_url"],
-                    "github_created_at": _parse_dt(item.get("created_at")),
-                    "github_updated_at": _parse_dt(item.get("updated_at")),
-                })
+                issues.append(
+                    {
+                        "github_id": item["number"],
+                        "title": item["title"],
+                        "body": (item.get("body") or "")[:2000],
+                        "status": item["state"],
+                        "assignees": [a["login"] for a in item.get("assignees", [])],
+                        "labels": [lbl["name"] for lbl in item.get("labels", [])],
+                        "milestone": item["milestone"]["title"] if item.get("milestone") else None,
+                        "github_url": item["html_url"],
+                        "github_created_at": _parse_dt(item.get("created_at")),
+                        "github_updated_at": _parse_dt(item.get("updated_at")),
+                    }
+                )
             if len(batch) < 100:
                 break
             page += 1
