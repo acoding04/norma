@@ -7,8 +7,8 @@ from sqlalchemy.orm import Session
 
 from app.api.dependencies import get_current_user
 from app.core.config import settings
-from app.core.llm import is_gemini_model
 from app.core.database import get_db
+from app.core.llm import is_gemini_model
 from app.models.custom_document import CustomDocument
 from app.models.document import Document
 from app.models.framework import Framework
