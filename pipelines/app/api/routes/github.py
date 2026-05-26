@@ -27,20 +27,18 @@ async def process_github_data(body: ProcessRequest):
     except ValueError as e:
         raise HTTPException(status_code=400, detail="Invalid integration_id") from e
 
+    tasks_query = text(
+        "SELECT github_id, title, body, status, assignees, labels"
+        " FROM github_tasks WHERE integration_id = :id"
+    )
+    files_query = text(
+        "SELECT file_path, content FROM github_repo_files WHERE integration_id = :id"
+    )
+
     db = SessionLocal()
     try:
-        tasks_rows = db.execute(
-            text(
-                "SELECT github_id, title, body, status, assignees, labels"
-                " FROM github_tasks WHERE integration_id = :id"
-            ),
-            {"id": body.integration_id},
-        ).fetchall()
-
-        files_rows = db.execute(
-            text("SELECT file_path, content FROM github_repo_files WHERE integration_id = :id"),
-            {"id": body.integration_id},
-        ).fetchall()
+        tasks_rows = db.execute(tasks_query, {"id": body.integration_id}).fetchall()
+        files_rows = db.execute(files_query, {"id": body.integration_id}).fetchall()
     finally:
         db.close()
 
