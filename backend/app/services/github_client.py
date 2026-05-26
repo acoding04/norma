@@ -82,7 +82,7 @@ async def fetch_issues(pat: str, owner: str, repo: str) -> list[dict]:
                     "body": (item.get("body") or "")[:2000],
                     "status": item["state"],
                     "assignees": [a["login"] for a in item.get("assignees", [])],
-                    "labels": [l["name"] for l in item.get("labels", [])],
+                    "labels": [lbl["name"] for lbl in item.get("labels", [])],
                     "milestone": item["milestone"]["title"] if item.get("milestone") else None,
                     "github_url": item["html_url"],
                     "github_created_at": _parse_dt(item.get("created_at")),

@@ -70,10 +70,7 @@ export function AppSidebar() {
   const [hasGitHub, setHasGitHub] = useState(false);
 
   useEffect(() => {
-    if (!currentProject) {
-      setHasGitHub(false);
-      return;
-    }
+    if (!currentProject) return;
     let cancelled = false;
     const check = () => {
       api
@@ -91,7 +88,7 @@ export function AppSidebar() {
       cancelled = true;
       window.removeEventListener('integration-changed', check);
     };
-  }, [currentProject?.id]);
+  }, [currentProject]);
 
   const initials = user
     ? user.name
@@ -216,7 +213,7 @@ export function AppSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
 
-          {hasGitHub && (
+          {currentProject && hasGitHub && (
             <SidebarGroup>
               <SidebarGroupLabel>GitHub</SidebarGroupLabel>
               <SidebarGroupContent>

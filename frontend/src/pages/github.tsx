@@ -121,6 +121,7 @@ export function GitHubPage() {
   }, [projectId, statusFilter, assigneeFilter, labelFilter, sprintFilter]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
   }, [fetchData]);
 
@@ -144,7 +145,7 @@ export function GitHubPage() {
         }
       })();
     },
-    [integration?.architecture_mermaid],
+    [integration],
   );
 
   const handleSync = async () => {

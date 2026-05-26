@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { GitBranch } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,7 +13,7 @@ export function IntegrationsPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const fetchIntegration = async () => {
+  const fetchIntegration = useCallback(async () => {
     if (!currentProject) return;
     setLoading(true);
     try {
@@ -24,11 +24,12 @@ export function IntegrationsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentProject]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchIntegration();
-  }, [currentProject?.id]);
+  }, [fetchIntegration]);
 
   const connected = !!integration;
 

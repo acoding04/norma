@@ -30,7 +30,10 @@ async def process_github_data(body: ProcessRequest):
     db = SessionLocal()
     try:
         tasks_rows = db.execute(
-            text("SELECT github_id, title, body, status, assignees, labels FROM github_tasks WHERE integration_id = :id"),
+            text(
+                "SELECT github_id, title, body, status, assignees, labels"
+                " FROM github_tasks WHERE integration_id = :id"
+            ),
             {"id": body.integration_id},
         ).fetchall()
 
