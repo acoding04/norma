@@ -3,6 +3,7 @@ import logging
 import litellm
 
 from app.core.config import settings
+from app.core.llm import is_gemini_model
 
 logger = logging.getLogger(__name__)
 
@@ -140,15 +141,17 @@ async def evaluate_risk(
     )
 
     try:
-        safety_settings = [
-            {"category": cat, "threshold": "BLOCK_NONE"}
-            for cat in [
-                "HARM_CATEGORY_HARASSMENT",
-                "HARM_CATEGORY_HATE_SPEECH",
-                "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-                "HARM_CATEGORY_DANGEROUS_CONTENT",
+        kwargs: dict = {}
+        if is_gemini_model():
+            kwargs["safety_settings"] = [
+                {"category": cat, "threshold": "BLOCK_NONE"}
+                for cat in [
+                    "HARM_CATEGORY_HARASSMENT",
+                    "HARM_CATEGORY_HATE_SPEECH",
+                    "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                    "HARM_CATEGORY_DANGEROUS_CONTENT",
+                ]
             ]
-        ]
         response = await litellm.acompletion(
             model=settings.litellm_model,
             messages=[
@@ -157,7 +160,7 @@ async def evaluate_risk(
             ],
             max_tokens=256,
             temperature=0,
-            safety_settings=safety_settings,
+            **kwargs,
         )
         content = response.choices[0].message.content
         if not content:

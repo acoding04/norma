@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.api.dependencies import get_current_user
 from app.core.config import settings
+from app.core.llm import is_gemini_model
 from app.core.database import get_db
 from app.models.custom_document import CustomDocument
 from app.models.document import Document
@@ -144,15 +145,17 @@ async def suggest_comment(
     user_prompt = _build_suggest_prompt(body.question, project, body.current_comment, db)
 
     try:
-        safety_settings = [
-            {"category": cat, "threshold": "BLOCK_NONE"}
-            for cat in [
-                "HARM_CATEGORY_HARASSMENT",
-                "HARM_CATEGORY_HATE_SPEECH",
-                "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-                "HARM_CATEGORY_DANGEROUS_CONTENT",
+        kwargs: dict = {}
+        if is_gemini_model():
+            kwargs["safety_settings"] = [
+                {"category": cat, "threshold": "BLOCK_NONE"}
+                for cat in [
+                    "HARM_CATEGORY_HARASSMENT",
+                    "HARM_CATEGORY_HATE_SPEECH",
+                    "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                    "HARM_CATEGORY_DANGEROUS_CONTENT",
+                ]
             ]
-        ]
         response = await litellm.acompletion(
             model=settings.litellm_model,
             messages=[
@@ -161,7 +164,7 @@ async def suggest_comment(
             ],
             max_tokens=2048,
             temperature=0.4,
-            safety_settings=safety_settings,
+            **kwargs,
         )
         finish_reason = response.choices[0].finish_reason
         content = response.choices[0].message.content
